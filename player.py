@@ -30,16 +30,17 @@ class Player(BaseEntity):
             self.angle -= rot_speed
 
         if key_state[pg.K_w]:
-            self.inc += vec2(0, -speed).rotate_rad(-self.angle)
+            self.inc += vec2(0, -speed)
         if key_state[pg.K_s]:
-            self.inc += vec2(0, speed).rotate_rad(-self.angle)
+            self.inc += vec2(0, speed)
         if key_state[pg.K_a]:
-            self.inc += vec2(-speed, 0).rotate_rad(-self.angle)
+            self.inc += vec2(-speed, 0)
         if key_state[pg.K_d]:
-            self.inc += vec2(speed, 0).rotate_rad(-self.angle)
+            self.inc += vec2(speed, 0)
 
         if self.inc.x and self.inc.y:
             self.inc *= self.diag_move_corr
+        self.inc.rotate_ip_rad(-self.angle)
 
     def single_fire(self, event):
         if event.key == pg.K_UP:
